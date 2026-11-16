@@ -1,0 +1,16 @@
+{
+  "blogs": [
+    {
+      "title": "topic1",
+      "body": "Why do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at it layout.",
+      "author": "Dawood",
+      "id": 1
+    },
+    {
+      "title": "My New React website",
+      "body": "Why do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at it layout.",
+      "author": "daud",
+      "id": 2
+    }
+  ]
+}
