@@ -5,25 +5,35 @@ const Create = () => {
      const [ body, setBody] = useState('');
      const [ author, setAuthor] = useState('Dawood');
      const [isPending, setIsPending] = useState(false);
+     const [submitError, setSubmitError] = useState(null);
      const history = useHistory();
 
-     const handleSubmit = (e) => {
+     const handleSubmit = async (e) => {
        e.preventDefault();
        
        const blog = {title, body, author};
-       console.log(blog);
-
        setIsPending(true);
+       setSubmitError(null);
 
-       fetch ('http://localhost:8000/blogs', {
-        method: 'POST',
-        headers: {"Content-type": "application/json"},
-        body: JSON.stringify(blog) 
-       }).then(() => {
-        console.log('new blog added');
-        setIsPending(false);
+       try {
+        const response = await fetch('http://localhost:8000/blogs', {
+            method: 'POST',
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify(blog)
+        });
+        if (!response.ok) {
+            throw new Error('Could not save the blog. Please try again.');
+        }
         history.push('/');
-       })
+       } catch (error) {
+        setSubmitError(
+            error.message === 'Failed to fetch'
+                ? 'Cannot connect to the blog server. Run "npm run server" and try again.'
+                : error.message
+        );
+       } finally {
+        setIsPending(false);
+       }
      } 
     return ( 
         <div className="create">
@@ -53,6 +63,7 @@ const Create = () => {
                 </select>
                 { !isPending && <button>Add Blog</button> }
                 { isPending && <button disabled>Adding Blog...</button> }
+                { submitError && <p role="alert">{ submitError }</p> }
                 <p>{ title }</p>
                 <p>{ body }</p>
                 <p>{ author }</p>
