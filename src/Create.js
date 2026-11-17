@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import { useHistory } from 'react-router-dom';
+import { blogsUrl } from './api';
 const Create = () => {
     const [ title, setTitle] = useState('');
      const [ body, setBody] = useState('');
@@ -16,7 +17,7 @@ const Create = () => {
        setSubmitError(null);
 
        try {
-        const response = await fetch('http://localhost:8000/blogs', {
+        const response = await fetch(blogsUrl, {
             method: 'POST',
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(blog)

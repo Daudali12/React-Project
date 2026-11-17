@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import useFetch from './useFetch';
+import { blogUrl } from './api';
 
 const BlogEditor = () => {
     const { id } = useParams();
     const history = useHistory();
-    const { data: blog, error, isPending } = useFetch(`http://localhost:8000/blogs/${id}`);
+    const { data: blog, error, isPending } = useFetch(blogUrl(id));
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Dawood');
@@ -26,7 +27,7 @@ const BlogEditor = () => {
         setSaveError(null);
 
         try {
-            const response = await fetch(`http://localhost:8000/blogs/${id}`, {
+            const response = await fetch(blogUrl(id), {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ title, body, author }),

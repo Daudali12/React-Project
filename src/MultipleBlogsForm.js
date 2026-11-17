@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { blogsUrl } from './api';
 
 const createEmptyBlog = () => ({ title: '', body: '', author: 'Dawood' });
 
@@ -39,7 +40,7 @@ const MultipleBlogsForm = () => {
 
         for (const blog of blogs) {
             try {
-                const response = await fetch('http://localhost:8000/blogs', {
+                const response = await fetch(blogsUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(blog),

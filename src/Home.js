@@ -1,9 +1,10 @@
 import { useState } from "react";
 import BlogList from "./BlogList";
 import useFetch from "./useFetch";
+import { blogsUrl } from "./api";
 
 const Home = () => {
-    const { data: blogs, isPending, error } = useFetch('http://localhost:8000/blogs');
+    const { data: blogs, isPending, error } = useFetch(blogsUrl);
     // const [blogs, setBlogs] = useState(null);
     // const [isPending, setIsPending] = useState(true);
     // const [error, setError] = useState(null);
