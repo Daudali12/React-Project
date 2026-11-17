@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 
-const BlogList = ({blogs, title, handleDelete}) => {
+const BlogList = ({blogs, title}) => {
 
  
  return (
@@ -13,7 +13,6 @@ const BlogList = ({blogs, title, handleDelete}) => {
                         <h2>{blogs.title}</h2>
                     </Link>
                     <p>Written by {blogs.author}</p>
-                    <button onClick={() => handleDelete(blogs.id)}>Delete Blog</button>
                 </div>
 
             ))}

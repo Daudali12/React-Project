@@ -64,9 +64,6 @@ const Create = () => {
                 { !isPending && <button>Add Blog</button> }
                 { isPending && <button disabled>Adding Blog...</button> }
                 { submitError && <p role="alert">{ submitError }</p> }
-                <p>{ title }</p>
-                <p>{ body }</p>
-                <p>{ author }</p>
             </form> 
         </div>
      );

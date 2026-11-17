@@ -11,11 +11,13 @@ afterEach(() => {
 test('shows a helpful message when the blog server is unavailable', async () => {
   global.fetch = jest.fn().mockRejectedValue(new TypeError('Failed to fetch'));
 
-  render(
+  const { container } = render(
     <MemoryRouter>
       <Create />
     </MemoryRouter>
   );
+
+  expect(container.querySelectorAll('form > p')).toHaveLength(0);
 
   const [titleInput, bodyInput] = screen.getAllByRole('textbox');
   fireEvent.change(titleInput, { target: { value: 'A new blog' } });

@@ -4,13 +4,13 @@ import { useHistory } from "react-router-dom";
 const BlogDetail = () => {
     const { id } =useParams();
     const { data: blog, error, isPending } = useFetch('http://Localhost:8000/blogs/' + id)
-    const histroy = useHistory();
+    const history = useHistory();
 
     const handleClick = () => {
         fetch ('http://Localhost:8000/blogs/' + blog.id, {
             method: 'DELETE'
         }).then(() => {
-            histroy.push('/');
+            history.push('/');
         })
     }
         return ( 
@@ -22,7 +22,10 @@ const BlogDetail = () => {
             <h2>{ blog.title }</h2>
             <p>Written by { blog.author }</p>
             <div>{ blog.body }</div>
-            <button onClick={handleClick}>delete</button>
+            <div className="blog-actions">
+                <button onClick={handleClick}>Delete</button>
+                <button onClick={() => history.push(`/update/${id}`)}>Edit</button>
+            </div>
         </article>
        )}
       </div>
